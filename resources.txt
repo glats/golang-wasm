@@ -25,5 +25,6 @@ https://golangcode.com/cross-platform-file-paths/
 https://medium.com/entendiendo-go-modules-de-go-1-11/go-modules-go-1-11-b%C3%A1sico-94f6b263b45e
 https://blog.golang.org/using-go-modules
 https://www.callicoder.com/golang-packages/
+https://github.com/golang/go/wiki/Modules#example
 https://medium.com/@bnprashanth256/implementing-logger-in-go-golang-176a260b6b08
 https://www.ardanlabs.com/blog/2013/11/using-log-package-in-go.html
