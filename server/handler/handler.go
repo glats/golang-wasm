@@ -11,13 +11,6 @@ type FileSystem struct {
 	fs http.FileSystem
 }
 
-// ShowIndex it will display index.html when it requested
-func ShowIndex() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./index.html")
-	})
-}
-
 // GetIndex it will display index.html when it requested
 func GetIndex(directory string) http.Handler {
 	return http.FileServer(FileSystem{http.Dir(directory)})
