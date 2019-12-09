@@ -29,3 +29,5 @@ https://www.callicoder.com/golang-packages/
 https://github.com/golang/go/wiki/Modules#example
 https://medium.com/@bnprashanth256/implementing-logger-in-go-golang-176a260b6b08
 https://www.ardanlabs.com/blog/2013/11/using-log-package-in-go.html
+http://marcio.io/2015/07/singleton-pattern-in-go/
+https://medium.com/@meson10/golang-singletons-762181b05d0b
