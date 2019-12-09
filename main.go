@@ -36,9 +36,11 @@ func main() {
 	logger := logger.GetLogger()
 	logger.Println("Server is starting...")
 
+	ho := handler.Option{directory}
+
 	router := http.NewServeMux()
-	router.Handle("/static/", handler.GetStatic(directory))
-	router.Handle("/", handler.GetIndex(directory))
+	router.Handle("/static/", ho.GetStatic())
+	router.Handle("/", ho.GetIndex())
 	router.Handle("/healt", handler.GetHealt(&healthy))
 	util.GettingWasmJS()
 
