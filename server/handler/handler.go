@@ -11,26 +11,27 @@ type FileSystem struct {
 	fs http.FileSystem
 }
 
-// Option handle options for methods
-type Option struct {
+// HandlerInit handle options for methods
+type HandlerInit struct {
 	Directory string
+	Health    *int32
 }
 
 // GetIndex it will display index.html when it requested
-func (o Option) GetIndex() http.Handler {
-	return http.FileServer(FileSystem{http.Dir(o.Directory)})
+func (hi HandlerInit) GetIndex() http.Handler {
+	return http.FileServer(FileSystem{http.Dir(hi.Directory)})
 }
 
 // GetStatic it will display the statics when it requested
 // Im using a custom http.FileSystem to avoid display the whole folder
-func (o Option) GetStatic() http.Handler {
-	return http.StripPrefix("/static/", o.GetIndex())
+func (hi HandlerInit) GetStatic() http.Handler {
+	return http.StripPrefix("/static/", hi.GetIndex())
 }
 
 // GetHealt check the healt of the server
-func GetHealt(healthy *int32) http.Handler {
+func (hi HandlerInit) GetHealt() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if atomic.LoadInt32(healthy) == 1 {
+		if atomic.LoadInt32(hi.Health) == 1 {
 			w.WriteHeader(http.StatusNoContent)
 			return
 		}

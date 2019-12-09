@@ -6,11 +6,13 @@ import (
 	"sync"
 )
 
-var once sync.Once
+var (
+	once   sync.Once
+	logger *log.Logger
+)
 
 // GetLogger create new logger
 func GetLogger() *log.Logger {
-	var logger *log.Logger
 	once.Do(func() {
 		logger = log.New(os.Stdout, "http: ", log.LstdFlags)
 	})

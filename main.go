@@ -36,12 +36,12 @@ func main() {
 	logger := logger.GetLogger()
 	logger.Println("Server is starting...")
 
-	ho := handler.Option{directory}
+	hi := handler.HandlerInit{Directory: directory, Health: &healthy}
 
 	router := http.NewServeMux()
-	router.Handle("/static/", ho.GetStatic())
-	router.Handle("/", ho.GetIndex())
-	router.Handle("/healt", handler.GetHealt(&healthy))
+	router.Handle("/static/", hi.GetStatic())
+	router.Handle("/", hi.GetIndex())
+	router.Handle("/health", hi.GetHealt())
 	util.GettingWasmJS()
 
 	nextRequestID := func() string {
@@ -64,7 +64,7 @@ func main() {
 	go func() {
 		<-quit
 		logger.Println("Server is shutting down...")
-		atomic.StoreInt32(&healthy, 0)
+		atomic.StoreInt32(hi.Health, 0)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
@@ -77,7 +77,7 @@ func main() {
 	}()
 
 	logger.Println("Server is ready to handle requests at", listenAddr)
-	atomic.StoreInt32(&healthy, 1)
+	atomic.StoreInt32(hi.Health, 1)
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		logger.Fatalf("Could not listen on %s: %v\n", listenAddr, err)
 	}
