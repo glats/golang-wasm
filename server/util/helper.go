@@ -6,20 +6,22 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/glats/golang-wasm/server/logger"
 )
 
 // GettingWasmJS grab file
 func GettingWasmJS() {
+	systemLogger := logger.GetSystemLogger()
 	path, _ := os.Getwd()
 	file := path + filepath.FromSlash("/public/wasm_exec.js")
-	// /misc/wasm/wasm_exec.js
 	wasm := runtime.GOROOT() + filepath.FromSlash("/misc/wasm/wasm_exec.js")
 	if _, err := os.Stat(file); err == nil {
 		return
 	}
 	err := copyFile(wasm, file)
 	if err != nil {
-		panic(err)
+		systemLogger.Panicln(err)
 	}
 }
 

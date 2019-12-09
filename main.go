@@ -33,7 +33,7 @@ func main() {
 	flag.StringVar(&directory, "d", "public", "the directory of static file to host")
 	flag.Parse()
 
-	logger := logger.GetLogger()
+	logger := logger.GetHttpLogger()
 	logger.Println("Server is starting...")
 
 	hi := handler.HandlerInit{Directory: directory, Health: &healthy}

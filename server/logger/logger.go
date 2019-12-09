@@ -7,14 +7,23 @@ import (
 )
 
 var (
-	once   sync.Once
-	logger *log.Logger
+	once         sync.Once
+	httpLogger   *log.Logger
+	systemLogger *log.Logger
 )
 
-// GetLogger create new logger
-func GetLogger() *log.Logger {
+// GetHttpLogger create logger for http requests
+func GetHttpLogger() *log.Logger {
 	once.Do(func() {
-		logger = log.New(os.Stdout, "http: ", log.LstdFlags)
+		httpLogger = log.New(os.Stdout, "http: ", log.LstdFlags)
 	})
-	return logger
+	return httpLogger
+}
+
+// GetSystemLogger create logger for system errors
+func GetSystemLogger() *log.Logger {
+	once.Do(func() {
+		systemLogger = log.New(os.Stdout, "system: ", log.LstdFlags)
+	})
+	return systemLogger
 }
