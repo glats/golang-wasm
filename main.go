@@ -33,10 +33,10 @@ func main() {
 	flag.StringVar(&directory, "d", "public", "the directory of static file to host")
 	flag.Parse()
 
-	logger := logger.GetHttpLogger()
+	logger := logger.GetLogger()
 	logger.Println("Server is starting...")
 
-	hi := handler.HandlerInit{Directory: directory, Health: &healthy}
+	hi := handler.Init{Directory: directory, Health: &healthy}
 
 	router := http.NewServeMux()
 	router.Handle("/static/", hi.GetStatic())

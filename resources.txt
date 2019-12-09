@@ -1,3 +1,4 @@
+https://blog.logrocket.com/building-full-stack-web-apps-with-go-vecty-and-webassembly/
 https://www.alexedwards.net/blog/serving-static-sites-with-go
 https://dev.to/hauxe/golang-http-serve-static-files-correctly-2oj2
 https://stackoverflow.com/questions/27945310/why-do-i-need-to-use-http-stripprefix-to-access-my-static-files

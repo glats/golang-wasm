@@ -12,16 +12,16 @@ import (
 
 // GettingWasmJS grab file
 func GettingWasmJS() {
-	systemLogger := logger.GetSystemLogger()
+	logger := logger.GetLogger()
 	path, _ := os.Getwd()
-	file := path + filepath.FromSlash("/public/wasm_exec.js")
+	file := path + filepath.FromSlash("/public/static/wasm_exec.js")
 	wasm := runtime.GOROOT() + filepath.FromSlash("/misc/wasm/wasm_exec.js")
 	if _, err := os.Stat(file); err == nil {
 		return
 	}
 	err := copyFile(wasm, file)
 	if err != nil {
-		systemLogger.Panicln(err)
+		logger.Panicln(err)
 	}
 }
 
